@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Sign in to your AdemolaPay account.">
+<title>Sign in | AdemolaPay</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+<header class="auth-header"><a class="brand" href="index.html"><span class="brand-mark">A<span>+</span></span><span>Ademola<span class="brand-pay">Pay</span></span></a><a class="back-link" href="index.html">← Back to home</a></header>
+<main class="auth-layout">
+<aside class="auth-aside"><div class="aside-mark">A+</div><h1>Your everyday payments, <span>all in one place.</span></h1><p>Sign in to continue to AdemolaPay. Simple, convenient payments start here.</p><div class="aside-points"><span><b>✓</b> One account for your everyday services</span><span><b>✓</b> Clear account and transaction updates</span><span><b>✓</b> Designed with security in mind</span></div></aside>
+<section class="auth-main"><div class="auth-form-wrap"><span class="form-kicker">WELCOME BACK</span><h2>Sign in to your account</h2><p class="form-intro">Enter your details to continue.</p>
+<div class="form-message" id="formMessage" role="alert"></div>
+<form id="signinForm">
+<label class="field"><span>Email address</span><input id="email" type="email" autocomplete="email" placeholder="you@example.com" required></label>
+<label class="field"><span>Password</span><div class="password-wrap"><input id="password" type="password" autocomplete="current-password" placeholder="Enter your password" minlength="6" required><button class="show-password" type="button" data-toggle-password="password">Show</button></div></label>
+<div class="form-options"><label class="remember"><input id="remember" type="checkbox" checked> Keep me signed in</label><a class="text-link" href="#" id="forgotPassword">Forgot password?</a></div>
+<button class="submit-btn" id="submitButton" type="submit">Sign in <span aria-hidden="true">→</span></button>
+</form><p class="switch-copy">Don't have an account? <a class="text-link" href="create-account.html">Create one</a></p><div class="security-note">▣ Your account is protected by Firebase Authentication</div></div></section>
+</main><footer class="auth-footer">© <span id="year"></span> AdemolaPay. Everyday payments, made simple.</footer>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script><script src="js/firebase-config.js"></script><script src="js/auth.js"></script>
+</body></html>
