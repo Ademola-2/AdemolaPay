@@ -38,7 +38,9 @@ function friendlyError(error) {
     "auth/weak-password": "Choose a stronger password with at least 6 characters.",
     "auth/too-many-requests": "Too many attempts. Please wait a little and try again.",
     "auth/network-request-failed": "Network error. Check your internet connection and try again.",
-    "auth/operation-not-allowed": "Email/password sign-in is not enabled in Firebase Authentication yet."
+    "auth/operation-not-allowed": "Email/password sign-in is not enabled in Firebase Authentication yet.",
+    "auth/unauthorized-domain": "This website domain is not authorized in Firebase. Add ademolapay.vercel.app to Firebase Authentication's authorized domains.",
+    "auth/invalid-api-key": "Firebase configuration appears invalid. Please check the web app configuration."
   };
   return errors[code] || "Something went wrong. Please try again.";
 }
@@ -60,12 +62,13 @@ if (signInForm) {
     const label = "Sign in →";
     setBusy(true, label);
     try {
+      // Set persistence before signing in so Firebase applies the chosen setting
+      // to this authentication operation.
+      const persistence = document.getElementById("remember").checked
+        ? firebase.auth.Auth.Persistence.LOCAL
+        : firebase.auth.Auth.Persistence.SESSION;
+      await firebase.auth().setPersistence(persistence);
       const credential = await firebase.auth().signInWithEmailAndPassword(email, password);
-      if (document.getElementById("remember").checked) {
-        await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
-      } else {
-        await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
-      }
       sessionStorage.setItem("ademolapayWelcome", credential.user.displayName || email);
       window.location.href = "dashboard.html";
     } catch (error) {
@@ -90,7 +93,12 @@ if (signUpForm) {
     setBusy(true, label);
     try {
       const credential = await firebase.auth().createUserWithEmailAndPassword(email, password);
-      await credential.user.updateProfile({ displayName: fullName });
+      try {
+        await credential.user.updateProfile({ displayName: fullName });
+      } catch (profileError) {
+        // Account creation already succeeded; don't tell the user it failed.
+        console.error("Could not save the display name:", profileError);
+      }
       sessionStorage.setItem("ademolapayWelcome", fullName);
       window.location.href = "dashboard.html";
     } catch (error) {
