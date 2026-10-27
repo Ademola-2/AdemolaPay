@@ -1,15 +1,14 @@
-// Firebase web app configuration.
-// Replace the placeholder values with the config from Firebase Console > Project settings > Your apps.
-// These web configuration values identify your Firebase app; never put service-account private keys here.
+// Firebase web app configuration for AdemolaPay.
+// These are client-side Firebase web config values, not a service-account private key.
 const firebaseConfig = {
-  apiKey: "PASTE_YOUR_FIREBASE_API_KEY_HERE",
+  apiKey: "AIzaSyC_0eNZiYNQpcJSlbsU8RtOw7fUzk26eXU",
   authDomain: "ademolapay-73989.firebaseapp.com",
   projectId: "ademolapay-73989",
   storageBucket: "ademolapay-73989.firebasestorage.app",
-  messagingSenderId: "PASTE_YOUR_MESSAGING_SENDER_ID_HERE",
-  appId: "PASTE_YOUR_FIREBASE_APP_ID_HERE"
+  messagingSenderId: "282036648096",
+  appId: "1:282036648096:web:3f3a8c68043f6402d231c5"
 };
 
-if (typeof firebase !== "undefined") {
+if (typeof firebase !== "undefined" && !firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
